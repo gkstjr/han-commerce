@@ -1,5 +1,6 @@
 package com.toy.hancommerce.model;
 
-public enum Roles {
+
+public enum Role {
     USER, ADMIN
 }

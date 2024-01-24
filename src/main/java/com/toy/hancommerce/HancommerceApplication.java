@@ -10,4 +10,5 @@ public class HancommerceApplication {
 		SpringApplication.run(HancommerceApplication.class, args);
 	}
 
+
 }

@@ -12,12 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Authority {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "authority_id")
-    private Long id;
-
-    @Column(length = 50)
+    @Column(name = "authority_name" , length = 50)
     private String authorityName;
 }

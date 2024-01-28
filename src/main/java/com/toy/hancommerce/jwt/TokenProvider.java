@@ -1,4 +1,4 @@
-package com.toy.hancommerce.config.jwt;
+package com.toy.hancommerce.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -30,7 +30,7 @@ public class TokenProvider implements InitializingBean {
     private Key key;
 
     public TokenProvider(@Value("${jwt.secret}") String secret,
-                         @Value("${jwt.token-validity-in-secondes}") long tokenValidityInSeconds) {
+                         @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
         this.secret = secret;
         this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
     }
@@ -80,7 +80,10 @@ public class TokenProvider implements InitializingBean {
                 Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
                         .map(SimpleGrantedAuthority::new)
                         .toList();
-        //시큐리티의 user 클래스 사용(아쉬운 점은 내 Entity 이름도 User라 좀 헷갈림 다음엔 Member로 해보자)
+        //시큐리티의 user 클래스 사용(아쉬운 점은 내 Entity 이름도 User라 좀 헷갈림 다음엔 Member로 해보자)\
+        authorities.stream()
+                .forEach(authority -> System.out.println("authority = " + authority.getAuthority()));
+
         org.springframework.security.core.userdetails.User principal
                 = new User(claims.getSubject(),"" , authorities);
 

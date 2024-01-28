@@ -12,6 +12,7 @@ import java.util.*;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
+@Table(name = "users")
 public class User {
     @JsonIgnore
     @Id

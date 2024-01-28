@@ -1,16 +1,14 @@
 package com.toy.hancommerce.config;
 
-import com.toy.hancommerce.config.jwt.JwtAccessDeniedHandler;
-import com.toy.hancommerce.config.jwt.JwtAuthenticationEntryPoint;
-import com.toy.hancommerce.config.jwt.JwtSecurityConfig;
-import com.toy.hancommerce.config.jwt.TokenProvider;
+import com.toy.hancommerce.jwt.JwtAccessDeniedHandler;
+import com.toy.hancommerce.jwt.JwtAuthenticationEntryPoint;
+import com.toy.hancommerce.jwt.JwtSecurityConfig;
+import com.toy.hancommerce.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -21,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfig extends WebSecurityConfiguration {
+public class SecurityConfig{
 
     private final TokenProvider tokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -60,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
                         authorizeRequests
                                 .requestMatchers("/authenticate").permitAll()
                                 .requestMatchers("/signup").permitAll()
+                                .requestMatchers("/users/**").hasRole("ADMIN")
                                 .requestMatchers(PathRequest.toH2Console()).permitAll()
                                 .anyRequest().authenticated()
                 )

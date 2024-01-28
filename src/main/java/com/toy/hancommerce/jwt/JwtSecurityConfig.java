@@ -1,6 +1,5 @@
-package com.toy.hancommerce.config.jwt;
+package com.toy.hancommerce.jwt;
 
-import com.toy.hancommerce.config.jwt.TokenProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

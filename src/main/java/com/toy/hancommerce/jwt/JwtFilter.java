@@ -1,4 +1,4 @@
-package com.toy.hancommerce.config.jwt;
+package com.toy.hancommerce.jwt;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,5 +1,6 @@
 package com.toy.hancommerce.service;
 
+import com.toy.hancommerce.jwt.SecurityUtil;
 import com.toy.hancommerce.model.Address;
 import com.toy.hancommerce.model.Authority;
 import com.toy.hancommerce.model.User;
@@ -10,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
 import java.util.Collections;
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package com.toy.hancommerce.service;
+package com.toy.hancommerce.jwt;
 
 import com.toy.hancommerce.model.User;
 import com.toy.hancommerce.repository.UserRepository;
@@ -36,6 +36,4 @@ public class CustomUserDetailsService implements UserDetailsService {
                 user.getPassword(),
                 grantedAuthorities);
     }
-
-
 }

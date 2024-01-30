@@ -32,7 +32,7 @@ public class TokenProvider implements InitializingBean {
     public TokenProvider(@Value("${jwt.secret}") String secret,
                          @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
         this.secret = secret;
-        this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
+        this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000; //1일
     }
 
     @Override
@@ -61,7 +61,7 @@ public class TokenProvider implements InitializingBean {
                 .claim(AUTHORITIES_KEY, authorities) //정보 저장
                 .signWith(key , SignatureAlgorithm.HS512) // 암호화 알고리즘
                 .setExpiration(validity)
-                .compact();
+                .compact(); //JSON 라이브러리 내 문자열로 반환 함수
     }
 
 

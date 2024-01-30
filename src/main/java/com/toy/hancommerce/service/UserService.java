@@ -28,16 +28,17 @@ public class UserService {
 
         //가입되어 있지 않은 회원이면,
         //권한 정보 만들고
-        Authority authority = Authority.builder()
-                .authorityName("ROLE_USER")
-                .build();
+        Authority authority = Optional.ofNullable(userDto.getAuth())
+                .filter(auth -> auth.equals("admin"))
+                .map(auth -> Authority.builder().authorityName("ROLE_ADMIN").build())
+                .orElse(Authority.builder().authorityName("ROLE_USER").build());
 
         //유저 정보를 만들어서 save
         User user = User.builder()
                 .username(userDto.getUsername())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .authorities(Collections.singleton(authority))
-                .address(new Address("경기도" , "시흥시" , "봉우재로"))
+                .address(new Address(userDto.getCity() , userDto.getStreet(), userDto.getZipcode()))
                 .build();
 
         return userRepository.save(user);

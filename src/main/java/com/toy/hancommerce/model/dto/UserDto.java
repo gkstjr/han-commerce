@@ -21,5 +21,10 @@ public class UserDto {
     @Size(min = 3, max = 100)
     private String password;
 
+    private String auth;
+
+    private String city;
+    private String street;
+    private String zipcode;
 
 }

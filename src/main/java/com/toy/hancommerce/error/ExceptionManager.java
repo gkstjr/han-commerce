@@ -40,5 +40,17 @@ public class ExceptionManager {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ExceptionDto(e.getMessage()));
     }
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<?> AuthenticationException(AuthenticationException e) {
+        log.error("AuthenticationException 발생" ,e);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(new ExceptionDto(e.getMessage()));
+    }
 
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<?> runtimeException(RuntimeException e) {
+        log.error("RuntimeException 발생" ,e);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ExceptionDto("RuntimeException!!"));
+    }
 }

@@ -1,5 +1,6 @@
 package com.toy.hancommerce.jwt;
 
+import com.toy.hancommerce.error.MyException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -66,7 +67,7 @@ public class TokenProvider implements InitializingBean {
 
 
     //토큰으로 클레임을 만들고 이를 이용해 유저 객체를 만들어서 최종적으로 authentication 객체 리턴
-    public Authentication getAuthentication(String token) {
+    public Authentication getAuthentication(String token)  {
         logger.info("======================Security - TokenProvider-getAuthentication=====================");
 
         Claims claims = Jwts

@@ -23,6 +23,7 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
                        AccessDeniedException accessDeniedException) throws IOException, ServletException {
         log.info("======================Security - JwtAccessDeniedHandler-handle=====================");
 //        시큐리티 특성상 filter 단에서 예외를 뱉어내기 때문에 내가 원하는 ExceptionManager Controller에 닿지 못함 -> 직접 ExceptionManager 응답형태처럼 응답처리
+        log.error("JwtAccessDeniedHandler 에러 ",accessDeniedException);
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

@@ -24,16 +24,16 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         log.info("======================Security - JwtAuthenticationEntryPoint-commence=====================");
 //        throw new MyException(ErrorCode.UNAUTHENTICATED);
 //        시큐리티 특성상 filter 단에서 예외를 뱉어내기 때문에 내가 원하는 ExceptionManager Controller에 닿지 못함 -> 직접 ExceptionManager 응답형태처럼 응답처리
-
+          log.error("JwtAuthenticationEntryPoint 에러 ",authException);
           response.setStatus(HttpStatus.UNAUTHORIZED.value());
           response.setContentType("application/json");
           response.setCharacterEncoding("UTF-8");
-            try {
-                String json = new ObjectMapper().writeValueAsString(new ExceptionDto(ErrorCode.UNAUTHENTICATED));
-                response.getWriter().write(json);
-            } catch (Exception e) {
-                log.error(e.getMessage());
-            }
+          try {
+              String json = new ObjectMapper().writeValueAsString(new ExceptionDto(ErrorCode.UNAUTHENTICATED));
+              response.getWriter().write(json);
+          } catch (Exception e) {
+              log.error(e.getMessage());
+          }
 //        response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 }

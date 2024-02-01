@@ -23,7 +23,6 @@ public class ExceptionDto {
     //Validation 오류시
     public ExceptionDto(String message) {
         this.result = "ERROR";
-        this.errorCode = ErrorCode.VALIDATION_ERROR;
         this.message = message;
     }
 }

@@ -1,5 +1,7 @@
 package com.toy.hancommerce.service;
 
+import com.toy.hancommerce.error.ErrorCode;
+import com.toy.hancommerce.error.MyException;
 import com.toy.hancommerce.jwt.SecurityUtil;
 import com.toy.hancommerce.model.Address;
 import com.toy.hancommerce.model.Authority;
@@ -23,7 +25,7 @@ public class UserService {
     @Transactional
     public User signup(UserDto userDto) {
         if(userRepository.findOneWithAuthoritiesByUsername(userDto.getUsername()).orElse(null) != null) {
-            throw new RuntimeException("이미 가입되어 있는 유저입니다.");
+            throw new MyException(ErrorCode.DUPLICATED_USER_NAME);
         }
 
         //가입되어 있지 않은 회원이면,

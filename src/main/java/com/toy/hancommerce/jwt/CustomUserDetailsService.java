@@ -1,5 +1,7 @@
 package com.toy.hancommerce.jwt;
 
+import com.toy.hancommerce.error.ErrorCode;
+import com.toy.hancommerce.error.MyException;
 import com.toy.hancommerce.model.User;
 import com.toy.hancommerce.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -21,10 +23,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional
     //로그인시에 DB에서 유저정보와 권한정보를 가져와서 해당 정보를 기반으로 userdetails.User 객체를 리턴해줌
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws MyException {
         return userRepository.findOneWithAuthoritiesByUsername(username)
                 .map(user -> createUser(username,user))
-                .orElseThrow(() -> new UsernameNotFoundException(username + " -> 데이터베이스에서 찾을 수 없습니다."));
+//                .orElseThrow(() -> new UsernameNotFoundException(username + " -> 데이터베이스에서 찾을 수 없습니다."));
+                .orElseThrow(() -> new MyException(ErrorCode.USERNAME_NOT_FOUND));
+
     }
 
     private org.springframework.security.core.userdetails.User createUser(String username, User user) {

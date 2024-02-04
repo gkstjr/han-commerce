@@ -38,6 +38,7 @@ public class UserController {
     public ResponseEntity<User> updateMyUserInfo(@RequestBody UserDto userDto) {
         return new ResponseEntity<>(userservice.updateMyUserInfo(userDto),HttpStatus.OK);
     }
+
     @GetMapping("/users/{username}")
     public ResponseEntity<User> getUserInfo(@PathVariable String username) {
         return ResponseEntity.ok(userservice.getUserWithAuthorities(username).get());

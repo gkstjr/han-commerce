@@ -4,6 +4,8 @@ import com.toy.hancommerce.jwt.JwtFilter;
 import com.toy.hancommerce.jwt.TokenProvider;
 import com.toy.hancommerce.model.dto.LoginDto;
 import com.toy.hancommerce.model.dto.TokenDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 //사용자 인가 체크 및 token 발급 controller
+@Tag(name = "USERS" , description = "계정관련 기능 API")
 @RestController
 @RequestMapping
 @AllArgsConstructor
@@ -26,6 +29,7 @@ public class AuthController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
+    @Operation(summary = "로그인(JWT 발급)")
     @PostMapping("/users/login")
     public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
 

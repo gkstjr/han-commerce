@@ -14,8 +14,11 @@ public enum ErrorCode {
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR,"서버 에러"),
     //security 필터 단에서 뱉어내느 예외 코드
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED,"권한 없음"),
-    UNAUTHENTICATED(HttpStatus.UNAUTHORIZED, "인증 실패");
+    UNAUTHENTICATED(HttpStatus.UNAUTHORIZED, "인증 실패"),
 
+    //category
+    DUPLICATED_CATEGORY_NAME(HttpStatus.NOT_FOUND,"카테고리명이 이미 있습니다.");
+    
     private HttpStatus status;
     private String message;
 

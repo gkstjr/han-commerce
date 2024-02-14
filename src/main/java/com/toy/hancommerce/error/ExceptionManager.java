@@ -1,5 +1,7 @@
 package com.toy.hancommerce.error;
 
+import jakarta.validation.UnexpectedTypeException;
+import jakarta.xml.bind.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.BadRequestException;
 import org.springframework.core.annotation.Order;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.rmi.UnexpectedException;
 import java.util.Objects;
 
 @RestControllerAdvice
@@ -25,7 +28,12 @@ public class ExceptionManager {
           return ResponseEntity.status(e.getErrorCode().getStatus())
                   .body(new ExceptionDto(e.getErrorCode()));
     }
-
+    @ExceptionHandler(UnexpectedTypeException.class)
+    public ResponseEntity<?> UnexpectedTypeExceptionHandler(UnexpectedTypeException e) {
+        log.error("UnexpectedTypeExceptionHandler 발생" ,e);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ExceptionDto(e.getMessage()));
+    }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> validExceptionHandler(MethodArgumentNotValidException e) {
         log.error("validExceptionHandler 발생" ,e);

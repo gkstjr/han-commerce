@@ -5,3 +5,12 @@ insert into AUTHORITY (AUTHORITY_NAME) values ('ROLE_ADMIN');
 
 -- insert into USER_AUTHORITY (USER_ID, AUTHORITY_NAME) values (1, 'ROLE_USER');
 insert into USER_AUTHORITY (USER_ID, AUTHORITY_NAME) values (3000, 'ROLE_ADMIN');
+
+insert into CATEGORY (category_id,NAME) values (1,'도서');
+insert into CATEGORY (category_id,NAME) values (2,'가구');
+insert into CATEGORY (category_id,NAME) values (3,'의류');
+insert into CATEGORY (category_id,NAME) values (4,'생필품');
+insert into CATEGORY (category_id,NAME) values (5,'전자기기');
+insert into CATEGORY (category_id,NAME) values (6,'기타');
+
+

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
@@ -60,7 +61,8 @@ public class SecurityConfig{
                         authorizeRequests
                                 .requestMatchers("/users/login", "/users/register","/error","/swagger-ui/**","/swagger-resources/**","/v3/api-docs/**").permitAll()
                                 .requestMatchers("/users/my-info").hasAnyRole("ADMIN","USER")
-                                .requestMatchers("/users","/users/{username}").hasRole("ADMIN")
+                                .requestMatchers("/users","/users/{username}","/categorys").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET,"/categorys").hasAnyRole("ADMIN","USER")
                                 .requestMatchers(PathRequest.toH2Console()).permitAll()
                                 .anyRequest().authenticated()
                 )

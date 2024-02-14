@@ -6,13 +6,17 @@ import com.toy.hancommerce.model.Category;
 import com.toy.hancommerce.model.dto.CategoryDto;
 import com.toy.hancommerce.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
     private final CategoryRepository categoryRepository;
-
+    @Transactional
     public Category create(CategoryDto categoryDto) {
         if(categoryRepository.findByName(categoryDto.getName()).orElse(null) != null) {
                 throw new MyException(ErrorCode.DUPLICATED_CATEGORY_NAME);
@@ -23,4 +27,20 @@ public class CategoryService {
 
         return categoryRepository.save(category);
     }
+    @Transactional
+    public List<Category> findAll() {
+        List<Category> categorys = categoryRepository.findAll(Sort.by(Sort.Direction.ASC,"id"));
+        if(categorys.isEmpty()) throw new MyException(ErrorCode.NOT_FOUND);
+
+        return categorys;
+    }
+    @Transactional
+    public Category update(long id,CategoryDto categoryDto) {
+        Category findCategory = categoryRepository.findById(id).orElseThrow(() -> new MyException(ErrorCode.NOT_FOUND));
+
+        findCategory.setName(categoryDto.getName());
+
+        return  categoryRepository.save(findCategory);
+    }
 }
+

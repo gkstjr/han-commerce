@@ -27,6 +27,10 @@ public class User {
     @Column(length = 100)
     private String password;
 
+    @JsonIgnore//추후에 응답 요청 Dto로 변경 하면 좋을 듯
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
+    private List<Order> orders = new ArrayList<>();
+
     @ManyToMany
     @JoinTable(
             name = "user_authority",

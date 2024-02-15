@@ -41,8 +41,7 @@ public class ItemService {
     }
     @Transactional
     public Item findById(long id) {
-        Item item = itemRepository.findOneWithCategoryById(id).orElseThrow(() -> new MyException(ErrorCode.NOT_FOUND));
-        return item;
+        return itemRepository.findOneWithCategoryById(id).orElseThrow(() -> new MyException(ErrorCode.NOT_FOUND));
         /*지연로딩 -> 프록시 호출 오류 피하기 위해 ResponseDto에 변환시 Category 프록시 초기화
         return  ItemResponseDto.builder()
                                     .categoryResponseDto(CategoryResponseDto.of(item.getCategory()))
@@ -68,5 +67,33 @@ public class ItemService {
             throw new MyException(ErrorCode.NOT_FOUND);
 
         return items;
+    }
+    @Transactional
+    public Item update(long id, ItemCreateDto itemCreateDto) {
+        if(itemRepository.existsByName(itemCreateDto.getName())) {
+            throw  new MyException(ErrorCode.DUPLICATED_NAME);
+        }
+        if(itemCreateDto.getStockQuantity() == 0 || itemCreateDto.getPrice() == 0) {
+            throw new MyException(ErrorCode.PRICE_OR_STOCK_QUANTITY);
+        }
+        Item item = itemRepository.findById(id).orElseThrow(() -> new MyException(ErrorCode.NOT_FOUND));
+
+        Category category = categoryRepository.findById(itemCreateDto.getCategoryId()).orElseThrow(() -> new MyException(ErrorCode.CATEGORY_NOT_FOUND));
+
+        item.setCategory(category);
+        item.setName(itemCreateDto.getName());
+        item.setPrice(itemCreateDto.getPrice());
+        item.setContent(itemCreateDto.getContent());
+        item.setStockQuantity(item.getStockQuantity());
+
+        return itemRepository.save(item);
+    }
+    @Transactional
+    public String delete(long id) {
+        Item item = itemRepository.findById(id).orElseThrow(() ->new MyException(ErrorCode.NOT_FOUND));
+
+        itemRepository.deleteById(id);
+
+        return item.getName();
     }
 }

@@ -1,8 +1,8 @@
-package com.toy.hancommerce.category;
+package com.toy.hancommerce.controller;
 
 import com.toy.hancommerce.model.Category;
 import com.toy.hancommerce.model.dto.CategoryDto;
-import com.toy.hancommerce.category.CategoryService;
+import com.toy.hancommerce.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

@@ -1,11 +1,12 @@
-package com.toy.hancommerce.item;
+package com.toy.hancommerce.service;
 
 import com.toy.hancommerce.error.ErrorCode;
 import com.toy.hancommerce.error.MyException;
+import com.toy.hancommerce.repository.ItemRepository;
 import com.toy.hancommerce.model.Category;
 import com.toy.hancommerce.model.Item;
 import com.toy.hancommerce.model.dto.ItemCreateDto;
-import com.toy.hancommerce.category.CategoryRepository;
+import com.toy.hancommerce.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

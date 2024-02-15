@@ -1,8 +1,8 @@
-package com.toy.hancommerce.item;
+package com.toy.hancommerce.controller;
 
 import com.toy.hancommerce.model.Item;
 import com.toy.hancommerce.model.dto.ItemCreateDto;
-import com.toy.hancommerce.item.ItemService;
+import com.toy.hancommerce.service.ItemService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

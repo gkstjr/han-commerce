@@ -1,4 +1,4 @@
-package com.toy.hancommerce.user;
+package com.toy.hancommerce.repository;
 
 import com.toy.hancommerce.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-package com.toy.hancommerce.item;
+package com.toy.hancommerce.repository;
 
 import com.toy.hancommerce.model.Item;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,18 +1,16 @@
-package com.toy.hancommerce.service;
+package com.toy.hancommerce.item;
 
 import com.toy.hancommerce.error.ErrorCode;
 import com.toy.hancommerce.error.MyException;
 import com.toy.hancommerce.model.Category;
 import com.toy.hancommerce.model.Item;
 import com.toy.hancommerce.model.dto.ItemCreateDto;
-import com.toy.hancommerce.repository.CategoryRepository;
-import com.toy.hancommerce.repository.ItemRepository;
-import jakarta.validation.Valid;
-import jakarta.validation.ValidationException;
+import com.toy.hancommerce.category.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +40,32 @@ public class ItemService {
     }
     @Transactional
     public Item findById(long id) {
-        return itemRepository.findById(id).orElseThrow(() -> new MyException(ErrorCode.NOT_FOUND));
+        Item item = itemRepository.findOneWithCategoryById(id).orElseThrow(() -> new MyException(ErrorCode.NOT_FOUND));
+        return item;
+        /*지연로딩 -> 프록시 호출 오류 피하기 위해 ResponseDto에 변환시 Category 프록시 초기화
+        return  ItemResponseDto.builder()
+                                    .categoryResponseDto(CategoryResponseDto.of(item.getCategory()))
+                                    .price(item.getPrice())
+                                    .name(item.getName())
+                                    .content(item.getContent())
+                                    .stockQuantity(item.getStockQuantity())
+                                    .build();
+         */
+    }
+    @Transactional
+    public List<Item> findAll() {
+        List<Item> items = itemRepository.findAllWithCategory();
+        if(items.isEmpty())
+            throw new MyException(ErrorCode.NOT_FOUND);
+
+        return items;
+    }
+    @Transactional
+    public List<Item> findAllByCategoryId(long categoryId) {
+        List<Item> items = itemRepository.findAllWithCategoryByCategoryId(categoryId);
+        if(items.isEmpty())
+            throw new MyException(ErrorCode.NOT_FOUND);
+
+        return items;
     }
 }

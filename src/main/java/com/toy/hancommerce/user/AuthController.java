@@ -1,4 +1,4 @@
-package com.toy.hancommerce.controller;
+package com.toy.hancommerce.user;
 
 import com.toy.hancommerce.jwt.JwtFilter;
 import com.toy.hancommerce.jwt.TokenProvider;

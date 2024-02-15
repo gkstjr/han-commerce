@@ -1,8 +1,8 @@
-package com.toy.hancommerce.controller;
+package com.toy.hancommerce.user;
 
 import com.toy.hancommerce.model.User;
 import com.toy.hancommerce.model.dto.UserDto;
-import com.toy.hancommerce.service.UserService;
+import com.toy.hancommerce.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

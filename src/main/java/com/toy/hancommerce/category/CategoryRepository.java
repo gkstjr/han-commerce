@@ -1,4 +1,4 @@
-package com.toy.hancommerce.repository;
+package com.toy.hancommerce.category;
 
 import com.toy.hancommerce.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;

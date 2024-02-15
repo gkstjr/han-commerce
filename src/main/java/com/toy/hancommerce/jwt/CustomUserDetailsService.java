@@ -3,7 +3,7 @@ package com.toy.hancommerce.jwt;
 import com.toy.hancommerce.error.ErrorCode;
 import com.toy.hancommerce.error.MyException;
 import com.toy.hancommerce.model.User;
-import com.toy.hancommerce.repository.UserRepository;
+import com.toy.hancommerce.user.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

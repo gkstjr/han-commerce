@@ -1,4 +1,4 @@
-package com.toy.hancommerce.service;
+package com.toy.hancommerce.user;
 
 import com.toy.hancommerce.error.ErrorCode;
 import com.toy.hancommerce.error.MyException;
@@ -7,7 +7,6 @@ import com.toy.hancommerce.model.Address;
 import com.toy.hancommerce.model.Authority;
 import com.toy.hancommerce.model.User;
 import com.toy.hancommerce.model.dto.UserDto;
-import com.toy.hancommerce.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

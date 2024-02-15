@@ -1,5 +1,6 @@
 package com.toy.hancommerce.error;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.BadRequestException;
 import org.springframework.core.annotation.Order;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Objects;
-
 @RestControllerAdvice
 @Slf4j
 public class ExceptionManager {

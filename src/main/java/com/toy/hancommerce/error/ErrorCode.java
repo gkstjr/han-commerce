@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ErrorCode {
     //COMMON
-    NOT_FOUND(HttpStatus.NOT_FOUND,"조회 결과가 없습니다."),
+    NOT_FOUND(HttpStatus.BAD_REQUEST,"조회 결과가 없습니다."),
 
     //USER
     USERNAME_NOT_FOUND(HttpStatus.NOT_FOUND,"유저를 찾을 수 없습니다."),

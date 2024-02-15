@@ -36,11 +36,24 @@ public class CategoryService {
     }
     @Transactional
     public Category update(long id,CategoryDto categoryDto) {
+        //같은 이름의 카테고리가 있을 시 에러 던짐
+        if(categoryRepository.existsByName(categoryDto.getName()))
+            throw  new MyException(ErrorCode.DUPLICATED_CATEGORY_NAME);
+
         Category findCategory = categoryRepository.findById(id).orElseThrow(() -> new MyException(ErrorCode.NOT_FOUND));
 
         findCategory.setName(categoryDto.getName());
 
-        return  categoryRepository.save(findCategory);
+        return categoryRepository.save(findCategory);
+    }
+
+    public String delete(long id) {
+
+        Category category = categoryRepository.findById(id)
+                                                .orElseThrow(() -> new MyException(ErrorCode.NOT_FOUND));
+
+        categoryRepository.delete(category);
+        return category.getName();
     }
 }
 

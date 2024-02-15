@@ -21,7 +21,7 @@ public class Item {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
-
+    @Column(unique = true)
     private String name;
 
     private long price;

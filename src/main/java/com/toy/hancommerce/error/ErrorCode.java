@@ -8,7 +8,8 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ErrorCode {
     //COMMON
-    NOT_FOUND(HttpStatus.BAD_REQUEST,"조회 결과가 없습니다."),
+    NOT_FOUND(HttpStatus.NOT_FOUND,"조회 결과가 없습니다."),
+    DUPLICATED_NAME(HttpStatus.CONFLICT, "이름이 중복됩니다"),
 
     //USER
     USERNAME_NOT_FOUND(HttpStatus.NOT_FOUND,"유저를 찾을 수 없습니다."),
@@ -20,8 +21,11 @@ public enum ErrorCode {
     UNAUTHENTICATED(HttpStatus.UNAUTHORIZED, "인증 실패"),
 
     //category
-    DUPLICATED_CATEGORY_NAME(HttpStatus.CONFLICT,"카테고리명이 이미 있습니다.");
-    
+    DUPLICATED_CATEGORY_NAME(HttpStatus.CONFLICT,"카테고리명이 이미 있습니다."),
+    PRICE_OR_STOCK_QUANTITY(HttpStatus.BAD_REQUEST,"price 필드 또는 stockQuantity 필드 값이 없습니다."),
+    CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND,"카테고리명을 찾을 수 없습니다.");
+
+    //item
     private HttpStatus status;
     private String message;
 

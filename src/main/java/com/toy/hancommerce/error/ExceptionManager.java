@@ -59,6 +59,6 @@ public class ExceptionManager {
     public ResponseEntity<?> runtimeException(RuntimeException e) {
         log.error("RuntimeException 발생" ,e);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ExceptionDto("RuntimeException!!"));
+                .body(new ExceptionDto(e.getMessage()));
     }
 }

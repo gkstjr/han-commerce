@@ -30,10 +30,17 @@ public class Item {
 
     private String content;
 
-    //연관관계 메소드(동작원리 주석처리하면서 이해하기)
-//    public void setCategory(Category category) {
-//        this.category = category;
-//        category.getItems().add(this);
-//    }
+    //=====비즈니스 로직======//
+    public void addStock(long quantity) {
+        this.stockQuantity += quantity;
+    }
 
+    public void removeStock(long quantity) {
+        long restStock = stockQuantity - quantity;
+        if(restStock < 0) {
+            throw new RuntimeException(name + "상품의 재고가 없습니다.");
+        }
+
+        this.stockQuantity = restStock;
+    }
 }

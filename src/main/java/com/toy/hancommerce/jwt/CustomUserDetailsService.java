@@ -2,7 +2,7 @@ package com.toy.hancommerce.jwt;
 
 import com.toy.hancommerce.error.ErrorCode;
 import com.toy.hancommerce.error.MyException;
-import com.toy.hancommerce.model.User;
+import com.toy.hancommerce.model.user.User;
 import com.toy.hancommerce.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

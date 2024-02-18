@@ -1,7 +1,7 @@
-package com.toy.hancommerce.model.dto;
+package com.toy.hancommerce.model.category.dto;
 
 
-import com.toy.hancommerce.model.Category;
+import com.toy.hancommerce.model.category.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -2,8 +2,8 @@ package com.toy.hancommerce.service;
 
 import com.toy.hancommerce.error.ErrorCode;
 import com.toy.hancommerce.error.MyException;
-import com.toy.hancommerce.model.Category;
-import com.toy.hancommerce.model.dto.CategoryDto;
+import com.toy.hancommerce.model.category.Category;
+import com.toy.hancommerce.model.category.dto.CategoryDto;
 import com.toy.hancommerce.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;

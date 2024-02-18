@@ -1,4 +1,4 @@
-package com.toy.hancommerce.model.dto;
+package com.toy.hancommerce.model.category.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

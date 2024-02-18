@@ -3,9 +3,9 @@ package com.toy.hancommerce.service;
 import com.toy.hancommerce.error.ErrorCode;
 import com.toy.hancommerce.error.MyException;
 import com.toy.hancommerce.repository.ItemRepository;
-import com.toy.hancommerce.model.Category;
-import com.toy.hancommerce.model.Item;
-import com.toy.hancommerce.model.dto.ItemCreateDto;
+import com.toy.hancommerce.model.category.Category;
+import com.toy.hancommerce.model.item.Item;
+import com.toy.hancommerce.model.item.dto.ItemCreateDto;
 import com.toy.hancommerce.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,6 +41,7 @@ public class ItemService {
     }
     @Transactional
     public Item findById(long id) {
+
         return itemRepository.findOneWithCategoryById(id).orElseThrow(() -> new MyException(ErrorCode.NOT_FOUND));
         /*지연로딩 -> 프록시 호출 오류 피하기 위해 ResponseDto에 변환시 Category 프록시 초기화
         return  ItemResponseDto.builder()

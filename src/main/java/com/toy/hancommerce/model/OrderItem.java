@@ -1,5 +1,7 @@
 package com.toy.hancommerce.model;
 
+import com.toy.hancommerce.model.item.Item;
+import com.toy.hancommerce.model.order.Order;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +33,21 @@ public class OrderItem {
     private long count;
 
     //=====비스니스 로직======//
+    //생성시
+    public static OrderItem createOrderItem(Item item , long count) {
+
+        item.removeStock(count);
+
+        OrderItem orderItem = OrderItem.builder()
+                .item(item)
+                .itemPrice(item.getPrice())
+                .count(count)
+                .build();
+
+        item.getOrderItems().add(orderItem);
+        
+        return  orderItem;
+    }
     //주문 취소시
     public void cancel() {
         getItem().addStock(count);

@@ -1,4 +1,4 @@
-package com.toy.hancommerce.model.dto;
+package com.toy.hancommerce.model.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

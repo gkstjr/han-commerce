@@ -1,16 +1,13 @@
 package com.toy.hancommerce.controller;
 
-import com.toy.hancommerce.model.dto.OrderRequestDTO;
-import com.toy.hancommerce.model.dto.OrderResponseDTO;
+import com.toy.hancommerce.model.order.dto.OrderRequestDTO;
+import com.toy.hancommerce.model.order.dto.OrderResponseDTO;
 import com.toy.hancommerce.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,10 +16,15 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
 
-    private OrderService orderService;
+    private final OrderService orderService;
 
     @PostMapping()
-    public ResponseEntity<List<OrderResponseDTO>> create(@RequestBody @Valid List<OrderRequestDTO> orderRequestDTOS) {
-        return new ResponseEntity<>(orderService.createOrder(orderRequestDTOS), HttpStatus.CREATED);
+    public ResponseEntity<OrderResponseDTO> create(@RequestBody @Valid List<OrderRequestDTO> orderRequestDTOS) {
+        return new ResponseEntity<OrderResponseDTO>(orderService.createOrder(orderRequestDTOS), HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<OrderResponseDTO> cancel(@PathVariable long id) {
+        return new ResponseEntity<OrderResponseDTO>(orderService.cancel(id),HttpStatus.OK);
     }
 }

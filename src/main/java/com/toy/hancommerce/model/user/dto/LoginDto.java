@@ -1,14 +1,11 @@
-package com.toy.hancommerce.model.dto;
+package com.toy.hancommerce.model.user.dto;
 
-import com.toy.hancommerce.model.Address;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.xml.transform.sax.SAXSource;
 
 @Data
 @AllArgsConstructor

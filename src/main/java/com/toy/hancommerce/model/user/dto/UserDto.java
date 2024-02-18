@@ -1,4 +1,4 @@
-package com.toy.hancommerce.model.dto;
+package com.toy.hancommerce.model.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;

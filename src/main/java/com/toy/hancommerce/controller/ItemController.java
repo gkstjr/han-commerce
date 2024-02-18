@@ -1,7 +1,7 @@
 package com.toy.hancommerce.controller;
 
-import com.toy.hancommerce.model.Item;
-import com.toy.hancommerce.model.dto.ItemCreateDto;
+import com.toy.hancommerce.model.item.Item;
+import com.toy.hancommerce.model.item.dto.ItemCreateDto;
 import com.toy.hancommerce.service.ItemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

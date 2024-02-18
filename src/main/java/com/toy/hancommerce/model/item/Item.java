@@ -1,10 +1,15 @@
-package com.toy.hancommerce.model;
+package com.toy.hancommerce.model.item;
 
+import com.toy.hancommerce.model.OrderItem;
+import com.toy.hancommerce.model.category.Category;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -24,6 +29,9 @@ public class Item {
     @Column(unique = true)
     private String name;
 
+    @OneToMany(mappedBy = "item")
+    private List<OrderItem> orderItems = new ArrayList<>();
+
     private long price;
 
     private long stockQuantity;
@@ -38,7 +46,7 @@ public class Item {
     public void removeStock(long quantity) {
         long restStock = stockQuantity - quantity;
         if(restStock < 0) {
-            throw new RuntimeException(name + "상품의 재고가 없습니다.");
+            throw new RuntimeException(name + " 상품의 재고가 없습니다.");
         }
 
         this.stockQuantity = restStock;

@@ -1,7 +1,7 @@
-package com.toy.hancommerce.model.dto;
+package com.toy.hancommerce.model.item.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.toy.hancommerce.model.Category;
+import com.toy.hancommerce.model.category.dto.CategoryResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

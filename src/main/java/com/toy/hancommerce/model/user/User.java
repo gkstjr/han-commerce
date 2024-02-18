@@ -1,9 +1,9 @@
-package com.toy.hancommerce.model;
+package com.toy.hancommerce.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.toy.hancommerce.model.order.Order;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.util.*;
 

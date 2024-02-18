@@ -1,14 +1,16 @@
-package com.toy.hancommerce.model;
+package com.toy.hancommerce.model.order;
 
-import com.toy.hancommerce.error.MyException;
+import com.toy.hancommerce.model.delivery.Delivery;
+import com.toy.hancommerce.model.delivery.DeliveryStatus;
+import com.toy.hancommerce.model.OrderItem;
+import com.toy.hancommerce.model.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 
-import java.lang.reflect.Member;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,8 +43,8 @@ public class Order {
 
     private long totalPrice;
 
-    private Date createDate;
-    private Date updateDate;
+    private LocalDateTime createDate;
+    private LocalDateTime updateDate;
 
 
     //=====비스니스 로직======//
@@ -52,11 +54,16 @@ public class Order {
 
         order.setUser(user);
         order.setDelivery(delivery);
+
+        long totalPrice = 0;
         for(OrderItem orderItem : orderItems) {
             order.getOrderItems().add(orderItem);
+            orderItem.setOrder(order);
+            totalPrice += orderItem.getTotalPrice();
         }
+        order.setTotalPrice(totalPrice);
         order.setStatus(OrderStatus.ORDER);
-        order.setCreateDate(new Date());
+        order.setCreateDate(LocalDateTime.now());
         return order;
     }
     /*주문 취소*/
@@ -66,6 +73,8 @@ public class Order {
 
 
         this.setStatus(OrderStatus.CANCEL);
+        this.delivery.setStatus(DeliveryStatus.CANCEL);
+
         for(OrderItem orderItem : orderItems) {
             orderItem.cancel();
         }

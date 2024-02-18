@@ -1,5 +1,7 @@
-package com.toy.hancommerce.model;
+package com.toy.hancommerce.model.delivery;
 
+import com.toy.hancommerce.model.order.Order;
+import com.toy.hancommerce.model.user.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

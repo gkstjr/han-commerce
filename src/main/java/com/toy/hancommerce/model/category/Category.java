@@ -1,6 +1,7 @@
-package com.toy.hancommerce.model;
+package com.toy.hancommerce.model.category;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.toy.hancommerce.model.item.Item;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

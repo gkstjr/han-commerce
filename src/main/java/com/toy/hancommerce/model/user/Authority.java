@@ -1,4 +1,4 @@
-package com.toy.hancommerce.model;
+package com.toy.hancommerce.model.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -8,10 +8,14 @@ import com.toy.hancommerce.model.delivery.DeliveryStatus;
 import com.toy.hancommerce.model.order.Order;
 import com.toy.hancommerce.model.order.dto.OrderRequestDTO;
 import com.toy.hancommerce.model.order.dto.OrderResponseDTO;
+import com.toy.hancommerce.model.order.dto.OrderSearchCondition;
+import com.toy.hancommerce.model.order.dto.SearchAllResponseDTO;
 import com.toy.hancommerce.model.user.User;
 import com.toy.hancommerce.repository.DeliveryRepository;
 import com.toy.hancommerce.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -75,4 +79,8 @@ public class OrderService {
                 .build();
     }
 
+    public Page<SearchAllResponseDTO> searchAll(OrderSearchCondition orderSearchCondition, Pageable pageable) {
+        //결과가 0일때를 조회해 보고 이상하면 0일떄 에외 던지자
+        return orderRepository.searchAll(orderSearchCondition , pageable);
+    }
 }

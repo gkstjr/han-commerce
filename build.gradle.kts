@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "3.2.2"
 	id("io.spring.dependency-management") version "1.1.4"
+	id("org.asciidoctor.jvm.convert") version "3.3.2"
 }
 
 group = "com.toy"
@@ -37,6 +38,7 @@ dependencies {
 	}
 
 	// QueryDSL Implementation
+	// QueryDSL Implementation
 	implementation ("com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta")
 	annotationProcessor("com.querydsl:querydsl-apt:${queryDslVersion}:jakarta")
 	annotationProcessor("jakarta.annotation:jakarta.annotation-api")
@@ -66,11 +68,12 @@ sourceSets {
 tasks.withType<JavaCompile> {
 	options.generatedSourceOutputDirectory = file(querydslDir)
 
+	// 위의 설정이 안되면 아래 설정 사용
+	// options.generatedSourceOutputDirectory.set(file(querydslDir))
 }
 
 tasks.named("clean") {
 	doLast {
 		file(querydslDir).deleteRecursively()
-
 	}
 }

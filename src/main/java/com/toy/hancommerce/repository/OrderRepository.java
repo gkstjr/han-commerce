@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order,Long> {
+public interface OrderRepository extends JpaRepository<Order,Long> , OrderRepositoryCustom{
 
 
     @Query("select o from Order o join fetch o.delivery  join fetch o.orderItems where o.id = :id" )

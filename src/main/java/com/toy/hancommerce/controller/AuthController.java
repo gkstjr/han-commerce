@@ -2,8 +2,8 @@ package com.toy.hancommerce.controller;
 
 import com.toy.hancommerce.jwt.JwtFilter;
 import com.toy.hancommerce.jwt.TokenProvider;
-import com.toy.hancommerce.model.dto.LoginDto;
-import com.toy.hancommerce.model.dto.TokenDto;
+import com.toy.hancommerce.model.user.dto.LoginDto;
+import com.toy.hancommerce.model.user.dto.TokenDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

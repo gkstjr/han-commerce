@@ -33,8 +33,9 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom{
     @Override
     public Page<SearchAllResponseDTO> searchAll(OrderSearchCondition condition, Pageable pageable) {
 
+        //fetchResult가 향후 미지원이 확정되어 조회결과와 count를 따로 구함
         List<SearchAllResponseDTO> content = queryFactory.
-                select(new QSearchAllResponseDTO(
+                select(new QSearchAllResponseDTO( //projection 기능 사용하여 반환 DTO 지정
                         order.id,
                         user.username,
                         delivery.status,
@@ -44,8 +45,8 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom{
                 .from(order)
                 .join(order.user, user)
                 .join(order.delivery, delivery)
-                .where(orderStatusEq(condition.getOrderStatus()),
-                        deliveryStatusEq(condition.getDeliveryStatus()),
+                .where(orderStatusEq(OrderStatus.valueOf(condition.getOrderStatus())),
+                        deliveryStatusEq(DeliveryStatus.valueOf(condition.getDeliveryStatus())),
                         dateGoe(condition.getCreateDateGoe()),
                         dateLoe(condition.getCreateDateLoe()),
                         totalPriceGoe(condition.getTotalPriceGoe()),
@@ -54,14 +55,15 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom{
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
-        //fetchResult가 향후 미지원이 확정되어 조회결과와 count를 따로 구함
+
+        //개수
         JPAQuery<Long> countQuery = queryFactory
                         .select(order.count())
                         .from(order)
                         .join(order.user, user)
                         .join(order.delivery, delivery)
-                        .where(orderStatusEq(condition.getOrderStatus()),
-                                deliveryStatusEq(condition.getDeliveryStatus()),
+                        .where(orderStatusEq(OrderStatus.valueOf(condition.getOrderStatus())),
+                                deliveryStatusEq(DeliveryStatus.valueOf(condition.getDeliveryStatus())),
                                 dateGoe(condition.getCreateDateGoe()),
                                 dateLoe(condition.getCreateDateLoe()),
                                 totalPriceGoe(condition.getTotalPriceGoe()),

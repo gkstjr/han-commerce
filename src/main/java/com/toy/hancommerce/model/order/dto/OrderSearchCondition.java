@@ -4,18 +4,18 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.toy.hancommerce.model.delivery.DeliveryStatus;
 import com.toy.hancommerce.model.order.OrderStatus;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
 @Data
 public class OrderSearchCondition {
 
-    private OrderStatus orderStatus;
-    private DeliveryStatus deliveryStatus;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private String orderStatus;
+    private String deliveryStatus;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
     private LocalDateTime createDateGoe;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
     private LocalDateTime createDateLoe;
 
     private Long totalPriceGoe;

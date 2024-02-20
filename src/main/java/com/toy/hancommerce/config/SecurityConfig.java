@@ -61,7 +61,7 @@ public class SecurityConfig{
                         authorizeRequests
                                 .requestMatchers("/users/login", "/users/register","/error","/swagger-ui/**","/swagger-resources/**","/v3/api-docs/**").permitAll()
                                 .requestMatchers("/users/my-info").hasAnyRole("ADMIN","USER")
-                                .requestMatchers(HttpMethod.GET,"/categorys","/items/**","/orders/**").hasAnyRole("ADMIN","USER")
+                                .requestMatchers(HttpMethod.GET,"/categorys","/items/**").hasAnyRole("ADMIN","USER")
                                 .requestMatchers("/users","/users/{username}","/categorys","/items/**").hasRole("ADMIN")
                                 .requestMatchers(PathRequest.toH2Console()).permitAll()
                                 .anyRequest().authenticated()

@@ -38,7 +38,6 @@ dependencies {
 	}
 
 	// QueryDSL Implementation
-	// QueryDSL Implementation
 	implementation ("com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta")
 	annotationProcessor("com.querydsl:querydsl-apt:${queryDslVersion}:jakarta")
 	annotationProcessor("jakarta.annotation:jakarta.annotation-api")

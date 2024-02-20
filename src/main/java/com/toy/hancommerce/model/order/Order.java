@@ -32,7 +32,7 @@ public class Order {
     private User user;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "delevery_id")
+    @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)

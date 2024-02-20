@@ -13,9 +13,9 @@ public class OrderSearchCondition {
 
     private String orderStatus;
     private String deliveryStatus;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createDateGoe;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createDateLoe;
 
     private Long totalPriceGoe;

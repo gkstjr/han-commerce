@@ -9,8 +9,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.autoconfigure.web.format.DateTimeFormatters;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -63,7 +65,11 @@ public class Order {
         }
         order.setTotalPrice(totalPrice);
         order.setStatus(OrderStatus.ORDER);
-        order.setCreateDate(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        now = LocalDateTime.parse(now.format(formatter),formatter);
+        order.setCreateDate(now);
         return order;
     }
     /*주문 취소*/

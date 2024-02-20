@@ -2,6 +2,8 @@ package com.toy.hancommerce.service;
 
 import com.toy.hancommerce.error.ErrorCode;
 import com.toy.hancommerce.error.MyException;
+import com.toy.hancommerce.model.CustomPage;
+import com.toy.hancommerce.model.CustomPageBack;
 import com.toy.hancommerce.model.OrderItem;
 import com.toy.hancommerce.model.delivery.Delivery;
 import com.toy.hancommerce.model.delivery.DeliveryStatus;
@@ -21,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -80,7 +81,13 @@ public class OrderService {
     }
 
     public Page<SearchAllResponseDTO> searchAll(OrderSearchCondition orderSearchCondition, Pageable pageable) {
-        //결과가 0일때를 조회해 보고 이상하면 0일떄 에외 던지자
+        //결과가 0일때는 content 빈 배열이 나옴
         return orderRepository.searchAll(orderSearchCondition , pageable);
+    }
+
+    public CustomPage searchMy(OrderSearchCondition orderSearchCondition, Pageable pageable) {
+        User user = userService.getMyUserWithAuthorities().orElseThrow(()-> new RuntimeException("로그인 된 아이디가 잘못 되었음"));
+        Page<SearchAllResponseDTO> page = orderRepository.searchMy(orderSearchCondition , pageable , user.getId());
+        return new CustomPage(page.getContent(),page.getNumber(), page.getSize(), page.getTotalElements(),page.getTotalPages());
     }
 }

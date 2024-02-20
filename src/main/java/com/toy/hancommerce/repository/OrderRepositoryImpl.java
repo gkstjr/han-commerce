@@ -5,18 +5,14 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.toy.hancommerce.model.delivery.DeliveryStatus;
-import com.toy.hancommerce.model.delivery.QDelivery;
 import com.toy.hancommerce.model.order.OrderStatus;
-import com.toy.hancommerce.model.order.QOrder;
 import com.toy.hancommerce.model.order.dto.OrderSearchCondition;
 import com.toy.hancommerce.model.order.dto.QSearchAllResponseDTO;
 import com.toy.hancommerce.model.order.dto.SearchAllResponseDTO;
-import com.toy.hancommerce.model.user.QUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
-import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -68,6 +64,46 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom{
                                 dateLoe(condition.getCreateDateLoe()),
                                 totalPriceGoe(condition.getTotalPriceGoe()),
                                 totalPriceLoe(condition.getTotalPriceLoe()));
+
+        return PageableExecutionUtils.getPage(content , pageable , countQuery::fetchOne);
+    }
+
+    @Override
+    public Page<SearchAllResponseDTO> searchMy(OrderSearchCondition condition, Pageable pageable , long userId) {
+        List<SearchAllResponseDTO> content = queryFactory.
+                                select(new QSearchAllResponseDTO(
+                                        order.id,
+                                        delivery.status,
+                                        delivery.address,
+                                        order.status,
+                                        order.totalPrice))
+                .from(order)
+                .join(order.user,user)
+                .join(order.delivery,delivery)
+                .where(user.id.eq(userId), // 자신의 아이디와 같은 결과만
+                        orderStatusEq(OrderStatus.valueOf(condition.getOrderStatus())),
+                        deliveryStatusEq(DeliveryStatus.valueOf(condition.getDeliveryStatus())),
+                        dateGoe(condition.getCreateDateGoe()),
+                        dateLoe(condition.getCreateDateLoe()),
+                        totalPriceGoe(condition.getTotalPriceGoe()),
+                        totalPriceLoe(condition.getTotalPriceLoe()))
+                .orderBy(order.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        //개수
+        JPAQuery<Long> countQuery = queryFactory
+                .select(order.count())
+                .from(order)
+                .join(order.user, user)
+                .join(order.delivery, delivery)
+                .where(orderStatusEq(OrderStatus.valueOf(condition.getOrderStatus())),
+                        deliveryStatusEq(DeliveryStatus.valueOf(condition.getDeliveryStatus())),
+                        dateGoe(condition.getCreateDateGoe()),
+                        dateLoe(condition.getCreateDateLoe()),
+                        totalPriceGoe(condition.getTotalPriceGoe()),
+                        totalPriceLoe(condition.getTotalPriceLoe()));
 
         return PageableExecutionUtils.getPage(content , pageable , countQuery::fetchOne);
     }

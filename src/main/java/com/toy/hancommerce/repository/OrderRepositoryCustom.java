@@ -8,4 +8,6 @@ import org.springframework.data.domain.Pageable;
 public interface OrderRepositoryCustom {
 
     Page<SearchAllResponseDTO> searchAll(OrderSearchCondition orderSearchCondition , Pageable pageable);
+
+    Page<SearchAllResponseDTO> searchMy(OrderSearchCondition orderSearchCondition, Pageable pageable,long userId);
 }

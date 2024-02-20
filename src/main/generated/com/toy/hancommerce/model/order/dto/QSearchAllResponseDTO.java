@@ -17,5 +17,9 @@ public class QSearchAllResponseDTO extends ConstructorExpression<SearchAllRespon
         super(SearchAllResponseDTO.class, new Class<?>[]{long.class, String.class, com.toy.hancommerce.model.delivery.DeliveryStatus.class, com.toy.hancommerce.model.user.Address.class, com.toy.hancommerce.model.order.OrderStatus.class, long.class}, orderId, username, deliveryStatus, address, orderStatus, totalPrice);
     }
 
+    public QSearchAllResponseDTO(com.querydsl.core.types.Expression<Long> orderId, com.querydsl.core.types.Expression<com.toy.hancommerce.model.delivery.DeliveryStatus> deliveryStatus, com.querydsl.core.types.Expression<? extends com.toy.hancommerce.model.user.Address> address, com.querydsl.core.types.Expression<com.toy.hancommerce.model.order.OrderStatus> orderStatus, com.querydsl.core.types.Expression<Long> totalPrice) {
+        super(SearchAllResponseDTO.class, new Class<?>[]{long.class, com.toy.hancommerce.model.delivery.DeliveryStatus.class, com.toy.hancommerce.model.user.Address.class, com.toy.hancommerce.model.order.OrderStatus.class, long.class}, orderId, deliveryStatus, address, orderStatus, totalPrice);
+    }
+
 }
 

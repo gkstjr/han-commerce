@@ -41,8 +41,8 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom{
                 .from(order)
                 .join(order.user, user)
                 .join(order.delivery, delivery)
-                .where(orderStatusEq(OrderStatus.valueOf(condition.getOrderStatus())),
-                        deliveryStatusEq(DeliveryStatus.valueOf(condition.getDeliveryStatus())),
+                .where(orderStatusEq(condition.getOrderStatus()),
+                        deliveryStatusEq(condition.getDeliveryStatus()),
                         dateGoe(condition.getCreateDateGoe()),
                         dateLoe(condition.getCreateDateLoe()),
                         totalPriceGoe(condition.getTotalPriceGoe()),
@@ -58,8 +58,8 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom{
                         .from(order)
                         .join(order.user, user)
                         .join(order.delivery, delivery)
-                        .where(orderStatusEq(OrderStatus.valueOf(condition.getOrderStatus())),
-                                deliveryStatusEq(DeliveryStatus.valueOf(condition.getDeliveryStatus())),
+                        .where(orderStatusEq(condition.getOrderStatus()),
+                                deliveryStatusEq(condition.getDeliveryStatus()),
                                 dateGoe(condition.getCreateDateGoe()),
                                 dateLoe(condition.getCreateDateLoe()),
                                 totalPriceGoe(condition.getTotalPriceGoe()),
@@ -81,8 +81,8 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom{
                 .join(order.user,user)
                 .join(order.delivery,delivery)
                 .where(user.id.eq(userId), // 자신의 아이디와 같은 결과만
-                        orderStatusEq(OrderStatus.valueOf(condition.getOrderStatus())),
-                        deliveryStatusEq(DeliveryStatus.valueOf(condition.getDeliveryStatus())),
+                        orderStatusEq(condition.getOrderStatus()),
+                        deliveryStatusEq(condition.getDeliveryStatus()),
                         dateGoe(condition.getCreateDateGoe()),
                         dateLoe(condition.getCreateDateLoe()),
                         totalPriceGoe(condition.getTotalPriceGoe()),
@@ -98,8 +98,9 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom{
                 .from(order)
                 .join(order.user, user)
                 .join(order.delivery, delivery)
-                .where(orderStatusEq(OrderStatus.valueOf(condition.getOrderStatus())),
-                        deliveryStatusEq(DeliveryStatus.valueOf(condition.getDeliveryStatus())),
+                .where(user.id.eq(userId),
+                        orderStatusEq(condition.getOrderStatus()),
+                        deliveryStatusEq(condition.getDeliveryStatus()),
                         dateGoe(condition.getCreateDateGoe()),
                         dateLoe(condition.getCreateDateLoe()),
                         totalPriceGoe(condition.getTotalPriceGoe()),
@@ -109,12 +110,23 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom{
     }
 
 
-    private BooleanExpression orderStatusEq(OrderStatus orderStatus) {
-        return orderStatus != null ? order.status.eq(orderStatus) : null;
+    private BooleanExpression orderStatusEq(String orderStatus) {
+        //String을 Enum변환 시 valueOf 호출 전 null체크
+        if(orderStatus == null) {
+            return null;
+        }
+        OrderStatus status = OrderStatus.valueOf(orderStatus);
+
+        return order.status.eq(status);
     }
 
-    private BooleanExpression deliveryStatusEq(DeliveryStatus deliveryStatus) {
-        return deliveryStatus != null ? delivery.status.eq(deliveryStatus) : null;
+    private BooleanExpression deliveryStatusEq(String deliveryStatus) {
+        if(deliveryStatus == null) {
+            return null;
+        }
+        DeliveryStatus status = DeliveryStatus.valueOf(deliveryStatus);
+
+        return delivery.status.eq(status);
     }
 
     private BooleanExpression dateGoe(LocalDateTime dateGoe) {

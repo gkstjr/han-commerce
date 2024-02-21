@@ -78,15 +78,16 @@ public class OrderService {
                 .totalPrice(order.getTotalPrice())
                 .build();
     }
-
+    @Transactional
     public Page<SearchAllResponseDTO> searchAll(OrderSearchCondition orderSearchCondition, Pageable pageable) {
         //결과가 0일때는 content 빈 배열이 나옴
         return orderRepository.searchAll(orderSearchCondition , pageable);
     }
-
+    @Transactional
     public CustomPage searchMy(OrderSearchCondition orderSearchCondition, Pageable pageable) {
         User user = userService.getMyUserWithAuthorities().orElseThrow(()-> new RuntimeException("로그인 된 아이디가 잘못 되었음"));
         Page<SearchAllResponseDTO> page = orderRepository.searchMy(orderSearchCondition , pageable , user.getId());
+
         return new CustomPage(page.getContent(),page.getNumber(), page.getSize(), page.getTotalElements(),page.getTotalPages());
     }
 }

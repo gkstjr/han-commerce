@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,14 +44,15 @@ public class DeliveryService {
                 .status(delivery.getStatus())
                 .build();
     }
-
+    @Transactional
     public List<DeliveryRespDTO> searchMy() {
-        User user = userService.getMyUserWithAuthorities().get(); // 이미 userService에서 에러처리 되서 따로 처리 x
+        User user = userService.getMyUserWithAuthorities().orElseThrow(()-> new RuntimeException("현재 아이디의 정보가 없습니다.")); // 이미 userService에서 에러처리 되서 따로 처리 x
 
         List<Order> orders = orderRepository.findOrdersWithDeliverysByUsername(user.getUsername());
         if(orders.isEmpty())
             throw new RuntimeException("해당 아이디의 주문목록이 없습니다.");
 
+        //searchAll 메소드의 stream 코드와 가독성 비교 해 볼 것
         List<DeliveryRespDTO> deliveries = new ArrayList<>();
         for(Order order : orders) {
             DeliveryRespDTO dto = DeliveryRespDTO.builder()
@@ -62,5 +64,21 @@ public class DeliveryService {
             deliveries.add(dto);
         }
         return deliveries;
+    }
+    @Transactional
+    public List<DeliveryRespDTO> searchAll() {
+        List<Delivery> list = deliveryRepository.findAllWithOrder();
+
+        if(list.isEmpty()) throw new RuntimeException("배송 목록이 없습니다.");
+
+        // serachMy 메소드랑 직접적인 가독성 비교를 해보고 싶어 stream 함수로 구성
+        return list.stream()
+                .map(delivery -> DeliveryRespDTO.builder()
+                        .orderId(delivery.getOrder().getId())
+                        .deliveryId(delivery.getId())
+                        .status(delivery.getStatus())
+                        .address(delivery.getAddress())
+                        .build())
+                .collect(Collectors.toList());
     }
 }

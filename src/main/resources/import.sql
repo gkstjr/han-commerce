@@ -1,10 +1,10 @@
-insert into users (USER_ID, USERNAME, PASSWORD, CITY , STREET , ZIPCODE) values (3000, 'admin', '$2a$08$lDnHPz7eUkSi6ao14Twuau08mzhWrL4kyZGGU5xfiGALO/Vxd5DOi', '경기도' , '시흥시' , '봉우재로');
+insert into users (USER_ID, USERNAME, PASSWORD, CITY , STREET , ZIPCODE) values (1, 'admin', '$2a$08$lDnHPz7eUkSi6ao14Twuau08mzhWrL4kyZGGU5xfiGALO/Vxd5DOi', '경기도' , '시흥시' , '봉우재로');
 
 insert into AUTHORITY (AUTHORITY_NAME) values ('ROLE_USER');
 insert into AUTHORITY (AUTHORITY_NAME) values ('ROLE_ADMIN');
 
 -- insert into USER_AUTHORITY (USER_ID, AUTHORITY_NAME) values (1, 'ROLE_USER');
-insert into USER_AUTHORITY (USER_ID, AUTHORITY_NAME) values (3000, 'ROLE_ADMIN');
+insert into USER_AUTHORITY (USER_ID, AUTHORITY_NAME) values (1, 'ROLE_ADMIN');
 
 insert into CATEGORY (category_id,NAME) values (1,'도서');
 insert into CATEGORY (category_id,NAME) values (2,'가구');
@@ -30,13 +30,22 @@ insert into delivery(delivery_id,status , city , street , zipcode) values(8,'REA
 insert into delivery(delivery_id,status , city , street , zipcode) values(9,'READY','경기도','시흥','배곧9');
 insert into delivery(delivery_id,status , city , street , zipcode) values(10,'READY','경기도','시흥','배곧1');
 
--- //2024-02-20 20:29:10.779621
-insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(2,2,3000,2000,'2024-02-20 20:29:10','ORDER');
-insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(3,3,3000,3000,'2024-02-20 20:29:10','ORDER');
-insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(4,4,3000,4000,FORMATDATETIME(current_timestamp,'yyyy-MM-dd HH:mm:ss'),'ORDER');
-insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(5,5,3000,5000,FORMATDATETIME(current_timestamp,'yyyy-MM-dd HH:mm:ss'),'ORDER');
-insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(6,6,3000,6000,FORMATDATETIME(current_timestamp,'yyyy-MM-dd HH:mm:ss'),'ORDER');
-insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(7,7,3000,6000,FORMATDATETIME(current_timestamp,'yyyy-MM-dd HH:mm:ss'),'ORDER');
-insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(8,8,3000,7000,FORMATDATETIME(current_timestamp,'yyyy-MM-dd HH:mm:ss'),'ORDER');
-insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(9,9,3000,7000,FORMATDATETIME(current_timestamp,'yyyy-MM-dd HH:mm:ss'),'ORDER');
-insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(10,10,3000,1000,'2024-02-20 20:29:10','ORDER');
+-- //2024-02-20 20:29:10.779621(H2)
+-- insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(2,2,3000,2000,'2024-02-20 20:29:10','ORDER');
+-- insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(3,3,3000,3000,'2024-02-20 20:29:10','ORDER');
+-- insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(4,4,3000,4000,FORMATDATETIME(current_timestamp,'yyyy-MM-dd HH:mm:ss'),'ORDER');
+-- insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(5,5,3000,5000,FORMATDATETIME(current_timestamp,'yyyy-MM-dd HH:mm:ss'),'ORDER');
+-- insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(6,6,3000,6000,FORMATDATETIME(current_timestamp,'yyyy-MM-dd HH:mm:ss'),'ORDER');
+-- insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(7,7,3000,6000,FORMATDATETIME(current_timestamp,'yyyy-MM-dd HH:mm:ss'),'ORDER');
+-- insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(8,8,3000,7000,FORMATDATETIME(current_timestamp,'yyyy-MM-dd HH:mm:ss'),'ORDER');
+-- insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(9,9,3000,7000,FORMATDATETIME(current_timestamp,'yyyy-MM-dd HH:mm:ss'),'ORDER');
+-- insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(10,10,3000,1000,'2024-02-20 20:29:10','ORDER');
+insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(2,2,1,2000,'2024-02-20 20:29:10','ORDER');
+insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(3,3,1,3000,'2024-02-20 20:29:10','ORDER');
+insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(4,4,1,4000,now(),'ORDER');
+insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(5,5,1,5000,now(),'ORDER');
+insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(6,6,1,6000,now(),'ORDER');
+insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(7,7,1,6000,now(),'ORDER');
+insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(8,8,1,7000,now(),'ORDER');
+insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(9,9,1,7000,now(),'ORDER');
+insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(10,10,1,1000,'2024-02-20 20:29:10','ORDER');

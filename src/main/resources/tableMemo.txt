@@ -1,0 +1,96 @@
+
+-- hanCommerce.users definition
+CREATE TABLE `users` (
+  `user_id` bigint NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `street` varchar(255) DEFAULT NULL,
+  `zipcode` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `UK_r43af9ap4edm43mmtq01oddj6` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- hanCommerce.user_authority definition
+-- hanCommerce.authority definition
+CREATE TABLE `authority` (
+  `authority_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`authority_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `user_authority` (
+  `user_id` bigint NOT NULL,
+  `authority_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`user_id`,`authority_name`),
+  KEY `FK6ktglpl5mjosa283rvken2py5` (`authority_name`),
+  CONSTRAINT `FK6ktglpl5mjosa283rvken2py5` FOREIGN KEY (`authority_name`) REFERENCES `authority` (`authority_name`),
+  CONSTRAINT `FKhi46vu7680y1hwvmnnuh4cybx` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- hanCommerce.delivery definition
+CREATE TABLE `delivery` (
+  `delivery_id` bigint NOT NULL AUTO_INCREMENT,
+  `city` varchar(255) DEFAULT NULL,
+  `street` varchar(255) DEFAULT NULL,
+  `zipcode` varchar(255) DEFAULT NULL,
+  `status` enum('READY','COMP','CANCEL') DEFAULT NULL,
+  PRIMARY KEY (`delivery_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- hanCommerce.orders definition
+
+CREATE TABLE `orders` (
+  `create_date` datetime(6) DEFAULT NULL,
+  `delivery_id` bigint DEFAULT NULL,
+  `order_id` bigint NOT NULL AUTO_INCREMENT,
+  `total_price` bigint NOT NULL,
+  `update_date` datetime(6) DEFAULT NULL,
+  `user_id` bigint DEFAULT NULL,
+  `status` enum('ORDER','COMP','CANCEL') DEFAULT NULL,
+  PRIMARY KEY (`order_id`),
+  UNIQUE KEY `UK_9ct0l8xfeaiqruabcqjh1neui` (`delivery_id`),
+  KEY `FK32ql8ubntj5uh44ph9659tiih` (`user_id`),
+  CONSTRAINT `FK32ql8ubntj5uh44ph9659tiih` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `FKtkrur7wg4d8ax0pwgo0vmy20c` FOREIGN KEY (`delivery_id`) REFERENCES `delivery` (`delivery_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- hanCommerce.category definition
+CREATE TABLE `category` (
+  `category_id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`category_id`),
+  UNIQUE KEY `UK_46ccwnsi9409t36lurvtyljak` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- hanCommerce.item definition
+CREATE TABLE `item` (
+  `category_id` bigint DEFAULT NULL,
+  `item_id` bigint NOT NULL AUTO_INCREMENT,
+  `price` bigint NOT NULL,
+  `stock_quantity` bigint NOT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`item_id`),
+  UNIQUE KEY `UK_lcsp6a1tpwb8tfywqhrsm2uvg` (`name`),
+  KEY `FK2n9w8d0dp4bsfra9dcg0046l4` (`category_id`),
+  CONSTRAINT `FK2n9w8d0dp4bsfra9dcg0046l4` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- hanCommerce.order_item definition
+CREATE TABLE `order_item` (
+  `count` bigint NOT NULL,
+  `item_id` bigint DEFAULT NULL,
+  `item_price` bigint NOT NULL,
+  `order_id` bigint DEFAULT NULL,
+  `order_item_id` bigint NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`order_item_id`),
+  KEY `FKija6hjjiit8dprnmvtvgdp6ru` (`item_id`),
+  KEY `FKt4dc2r9nbvbujrljv3e23iibt` (`order_id`),
+  CONSTRAINT `FKija6hjjiit8dprnmvtvgdp6ru` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`),
+  CONSTRAINT `FKt4dc2r9nbvbujrljv3e23iibt` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+insert into AUTHORITY (AUTHORITY_NAME) values ('ROLE_USER');
+insert into AUTHORITY (AUTHORITY_NAME) values ('ROLE_ADMIN');
+
+

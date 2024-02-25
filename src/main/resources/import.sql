@@ -1,8 +1,7 @@
-insert into users (USER_ID, USERNAME, PASSWORD, CITY , STREET , ZIPCODE) values (1, 'admin', '$2a$08$lDnHPz7eUkSi6ao14Twuau08mzhWrL4kyZGGU5xfiGALO/Vxd5DOi', '경기도' , '시흥시' , '봉우재로');
+-- insert into AUTHORITY (AUTHORITY_NAME) values ('ROLE_USER');
+-- insert into AUTHORITY (AUTHORITY_NAME) values ('ROLE_ADMIN');
 
-insert into AUTHORITY (AUTHORITY_NAME) values ('ROLE_USER');
-insert into AUTHORITY (AUTHORITY_NAME) values ('ROLE_ADMIN');
-
+/*insert into users (USER_ID, USERNAME, PASSWORD, CITY , STREET , ZIPCODE) values (1, 'admin', '$2a$08$lDnHPz7eUkSi6ao14Twuau08mzhWrL4kyZGGU5xfiGALO/Vxd5DOi', '경기도' , '시흥시' , '봉우재로');
 -- insert into USER_AUTHORITY (USER_ID, AUTHORITY_NAME) values (1, 'ROLE_USER');
 insert into USER_AUTHORITY (USER_ID, AUTHORITY_NAME) values (1, 'ROLE_ADMIN');
 
@@ -48,4 +47,4 @@ insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) 
 insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(7,7,1,6000,now(),'ORDER');
 insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(8,8,1,7000,now(),'ORDER');
 insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(9,9,1,7000,now(),'ORDER');
-insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(10,10,1,1000,'2024-02-20 20:29:10','ORDER');
+insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(10,10,1,1000,'2024-02-20 20:29:10','ORDER');*/

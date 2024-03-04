@@ -29,6 +29,7 @@ public class User {
 
     @JsonIgnore//추후에 응답 요청 Dto로 변경 하면 좋을 듯
     @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
+    @Builder.Default
     private List<Order> orders = new ArrayList<>();
 
     @ManyToMany

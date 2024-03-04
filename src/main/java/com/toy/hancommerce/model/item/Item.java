@@ -30,6 +30,7 @@ public class Item {
     private String name;
 
     @OneToMany(mappedBy = "item")
+    @Builder.Default
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private long price;

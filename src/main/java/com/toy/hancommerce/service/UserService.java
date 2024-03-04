@@ -47,6 +47,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
+
     //유저 , 권한 정보를 가져오는 메소드
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthorities(String username) {

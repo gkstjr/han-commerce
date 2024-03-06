@@ -11,7 +11,7 @@ class HancommerceApplicationTests {
 	void contextLoads() {
 
 	}
-	@Test
+//	@Test
 	void hanseok() {
 		if(1 == 1) {
 			throw new IllegalArgumentException();

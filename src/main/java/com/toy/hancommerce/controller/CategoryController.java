@@ -39,5 +39,4 @@ public class CategoryController {
     public ResponseEntity<String> delete(@PathVariable long id) {
         return new ResponseEntity<>( categoryService.delete(id) + " 카테고리가 삭제되었습니다.",HttpStatus.OK);
     }
-
 }

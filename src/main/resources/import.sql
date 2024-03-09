@@ -47,4 +47,6 @@ insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) 
 insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(7,7,1,6000,now(),'ORDER');
 insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(8,8,1,7000,now(),'ORDER');
 insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(9,9,1,7000,now(),'ORDER');
+
 insert into ORDERS(order_id,delivery_id,user_id,total_price,create_date,status) values(10,10,1,1000,'2024-02-20 20:29:10','ORDER');*/
+

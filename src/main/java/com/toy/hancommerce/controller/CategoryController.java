@@ -24,6 +24,7 @@ public class CategoryController {
     public ResponseEntity<Category> create(@RequestBody @Valid CategoryDto categoryDto) {
         return new ResponseEntity<Category>(categoryService.create(categoryDto), HttpStatus.CREATED);
     }
+
     @Operation(summary = "전체 조회(사용자/관리자)")
     @GetMapping()
     public ResponseEntity<List<Category>> findAll() {

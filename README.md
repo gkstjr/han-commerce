@@ -46,8 +46,16 @@ JPA를 학습 후 실무에서 사용할 수 있는 상황이 없어 프로젝�
 swagger를 통해 restAPI의 문서화를 진행
 
 
+<br>
+
+## ⚙️ 기술 스택
 
 <br>
+
+![image](https://github.com/gkstjr/han-commerce/assets/99389922/474d243e-934c-407c-9487-dccbcf230196)
+
+<br>
+
 
 ## 🧑‍🤝‍🧑 기능 소개
  
@@ -71,17 +79,6 @@ swagger를 통해 restAPI의 문서화를 진행
 |배송| 조회 | 관리자는 전체 배송 조회 가능  |
 |   | 배송 완료 | 자동으로 주문 완료 |
 
-
-
-
-
-## ⚙️ 개발 환경 및 사용 기술
-- `Java 11`
-- **IDE** : intellij 
-- **Framework** : SpringBoot
-- **Database** : MySQL
-- **ORM** : JPA
-- aws , SpringSecurity , HTML , CSS , Javascript , ajax , Github
 <br>
 
 

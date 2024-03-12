@@ -30,4 +30,14 @@ public class Category {
     @Builder.Default
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Item> items = new ArrayList<Item>();
+
+    //N + 1 테스트용 코드
+    public Item createItem(String name) {
+        Item item = Item.builder()
+                        .name(name)
+                        .build();
+
+        this.items.add(item);
+        return item;
+    }
 }

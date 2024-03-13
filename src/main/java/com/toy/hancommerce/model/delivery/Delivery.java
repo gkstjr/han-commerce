@@ -27,4 +27,6 @@ public class Delivery {
 
     @OneToOne(mappedBy = "delivery")
     private Order order;
+    // N + 1 테스트(추후에 개발용 DB 에서도 컬럼 삭제)
+    private int DeliveryTest;
 }

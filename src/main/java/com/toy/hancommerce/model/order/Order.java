@@ -49,6 +49,11 @@ public class Order {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
+    //N + 1 테스트를 위한 메소드
+    public void register(Delivery delivery) {
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
 
     //=====비스니스 로직======//
     //=====생성 메소드===//

@@ -63,7 +63,7 @@ public class SecurityConfig{
                                 .requestMatchers("/users/my-info").hasAnyRole("ADMIN","USER")
                                 .requestMatchers(HttpMethod.GET,"/categorys","/items/**").hasAnyRole("ADMIN","USER")
                                 .requestMatchers("/users","/users/{username}","/categorys","/items/**","/deliverys").hasRole("ADMIN")
-                                .requestMatchers(PathRequest.toH2Console()).permitAll()
+                               // .requestMatchers(PathRequest.toH2Console()).permitAll()
                                 .anyRequest().authenticated()
                 )
 

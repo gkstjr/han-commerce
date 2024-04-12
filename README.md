@@ -10,8 +10,7 @@
 
 <br>
 
-Swagger UI : [http://13.125.133.7:8080](http://3.39.231.19:8080/swagger-ui/index.html)
-
+Swagger UI :  http://3.39.193.88:8080/swagger-ui/index.html
 <br>
 
 ### 프로젝트 순서
